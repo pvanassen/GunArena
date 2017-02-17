@@ -82,6 +82,9 @@ simulated function BeginPlay()
 
 function PostBeginPlay()
 {
+	if ( !bInitialized )
+		Initialize();
+
 	local GunArenaGameRules G;
 	local class<Weapon> ExtraWeaponClass;
 	local class<Weapon> DefaultWeaponClass;
@@ -133,8 +136,6 @@ function string GetInventoryClassOverride(string InventoryClassName)
 
 function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
 {
-	if ( !bInitialized )
-		Initialize();
 	if(Other.IsA('Weapon'))
 	{
 		if(Other.IsA('TransLauncher') || Weapon(Other).bNoInstagibReplace)
